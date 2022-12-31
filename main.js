@@ -11,7 +11,7 @@ const headerElements = () =>{
     const header = document.createElement("header");
 
     const nav = document.createElement("nav");
-    nav.className = "navigation";
+    nav.classList.add("navigation");
 
     const title = document.createElement("h2");
     title.textContent = "TV MAZE | The Wire";
@@ -72,7 +72,7 @@ const createCards = (data) =>{
     //cards
     cardsData.forEach((e)=>{
         const card = document.createElement("div");
-        card.className = "card";
+        card.classList = "card";
         
         const picture = document.createElement("img");
         picture.src = e.image.medium;
@@ -80,10 +80,10 @@ const createCards = (data) =>{
         picture.alt = e.name;
 
         const cardBody = document.createElement("div");
-        cardBody.className = "card-info";
+        cardBody.className = "card-body";
 
         const cardInformation = document.createElement("div");
-        cardInformation.className = "card-description";
+        cardInformation.className = "card-information";
         
         const cardTitle = document.createElement("h3");
         cardTitle.className = "card-title";
@@ -100,7 +100,7 @@ const createCards = (data) =>{
         .replaceAll("</p>", "").replaceAll("<br />", "").replaceAll("<i>", "").replaceAll("</i>", "");
 
         const cardButton = document.createElement("a");
-        cardButton.className = "card-button";
+        cardButton.classList = "card-button";
         cardButton.innerText = "Watch";
         cardButton.href = e.url;
 
@@ -134,7 +134,21 @@ const footerElements = () =>{
     footer.append(licenseText);
     footer.append(designer);
 };
+getData();
 headerElements();
 mainElements();
+//search function
+let searchBox = document.querySelector(".searchbar");
+searchBox.addEventListener("input",()=>{
+    const cards = document.querySelectorAll(".card");
+    let val = searchBox.value.toLowerCase();
+    cards.forEach((e)=>{
+        const cardsTitle = e.querySelector(".card-title").innerText.toLowerCase();
+        if(cardsTitle.includes(val))
+            e.classList.remove("hide");
+        else{
+            e.classList.add("hide");
+        }
+    });
+})
 footerElements();
-getData();
