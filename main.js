@@ -14,7 +14,7 @@ const headerElements = () =>{
     nav.classList.add("navigation");
 
     const title = document.createElement("h2");
-    title.textContent = "TV MAZE | The Wire";
+    title.textContent = "TV MAZE > The Wire";
 
     const searchBarDiv = document.createElement("div");
     searchBarDiv.className = "searchbar-div";
@@ -50,6 +50,7 @@ const createCards = (data) =>{
 
     const episodeOption = document.createElement("option");
     episodeOption.innerText = "Select Episode";
+    episodeOption.setAttribute("selected", "selected");
     episodeOption.setAttribute("disabled","disabled");
 
     const select = document.createElement("select");
@@ -72,7 +73,7 @@ const createCards = (data) =>{
     //cards
     cardsData.forEach((e)=>{
         const card = document.createElement("div");
-        card.classList = "card";
+        card.className = "card";
         
         const picture = document.createElement("img");
         picture.src = e.image.medium;
@@ -95,10 +96,8 @@ const createCards = (data) =>{
 
         const descriptionText = document.createElement("p");
         descriptionText.className = "description"
-        descriptionText.innerText = e.summary;
-        descriptionText.innerText = descriptionText.innerText.replaceAll("<p>", "")
-        .replaceAll("</p>", "").replaceAll("<br />", "").replaceAll("<i>", "").replaceAll("</i>", "");
-
+        descriptionText.innerHTML = e.summary;
+        descriptionText.innerHTML = descriptionText.innerHTML.substring(0,120)+"..."
         const cardButton = document.createElement("a");
         cardButton.classList = "card-button";
         cardButton.innerText = "Watch";
@@ -120,7 +119,7 @@ const footerElements = () =>{
     body.querySelector("main").insertAdjacentElement("afterend",footer);
 
     const licenseText = document.createElement("p");
-	licenseText.classList = "tvmaze-api-license";
+	licenseText.className = "tvmaze-api-license";
 
     const licenseLink = document.createElement("a");
     licenseLink.innerText = "This website created by TVmaze Api";
