@@ -26,12 +26,17 @@ const headerElements = () =>{
     searchBar.className = "searchbar";
     searchBar.type = "search";
     searchBar.placeholder = "Search Here";
+
+    const result = document.createElement("p");
+    result.className ="show-result"
+
     //add
     searchBarDiv.append(searchBar);
     searchBarDiv.append(searchIcon);
     nav.append(title);
     nav.append(searchBarDiv);
     header.append(nav);
+    nav.append(result)
     body.append(header);
 };
 //main elements
@@ -46,7 +51,7 @@ const mainElements = () => {
 };
 const createCards = (data) =>{
     let cardsData = [...data];
-    const navigation = document.querySelector(".navigation");
+    const navigation = document.querySelector("header");
 
     const episodeOption = document.createElement("option");
     episodeOption.innerText = "Select Episode";
@@ -74,7 +79,7 @@ const createCards = (data) =>{
     cardsData.forEach((e)=>{
         const card = document.createElement("div");
         card.className = "card";
-        
+        card.classList.add("show")
         const picture = document.createElement("img");
         picture.src = e.image.medium;
         picture.className = "card-img"
@@ -140,14 +145,23 @@ mainElements();
 let searchBox = document.querySelector(".searchbar");
 searchBox.addEventListener("input",()=>{
     const cards = document.querySelectorAll(".card");
+
     let val = searchBox.value.toLowerCase();
     cards.forEach((e)=>{
         const cardsTitle = e.querySelector(".card-title").innerText.toLowerCase();
-        if(cardsTitle.includes(val))
+        if(cardsTitle.includes(val)){
+            e.classList.add("show");
             e.classList.remove("hide");
+        }
         else{
             e.classList.add("hide");
+            e.classList.remove("show");
         }
     });
+    const result = document.querySelector(".show-result")
+    let numS = document.querySelectorAll(".show").length
+    result.textContent =numS + " result found"
+    if(cards.length == numS) result.textContent = "" 
+
 })
 footerElements();

@@ -11,9 +11,12 @@ body{
 }
 .navigation{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 20;
+}
+.select-episode{
+    margin: 20px;
 }
 .searchbar-div{
     display: flex;
